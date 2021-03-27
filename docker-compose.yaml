@@ -1,0 +1,15 @@
+version: "3"
+services:
+    mysql:
+        image: mysql:8.0.17
+        container_name: mysql
+        ports:
+            - "3306:3306" # host에 mysql이 이미 있는경우 port 에러나서 수정
+        environment:
+            MYSQL_ROOT_PASSWORD: "root" # MYSQL password
+            MYSQL_DATABASE: "photolog"
+        command: # 한글깨짐 방지
+            - --character-set-server=utf8mb4
+            - --collation-server=utf8mb4_unicode_ci
+        volumes:
+            - ./db:/var/lib/mysql
