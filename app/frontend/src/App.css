@@ -1,0 +1,7 @@
+.navi-control {
+    position: absolute;
+    right: 0;
+}
+.btn-marker:focus {
+    outline: transparent;
+}
