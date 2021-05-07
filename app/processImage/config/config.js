@@ -1,8 +1,13 @@
-import dotenv from "dotenv";
 import path from "path";
+import dotenv from "dotenv";
 const __dirname = path.resolve();
 
 dotenv.config({ path: path.join(__dirname, "/config/.env") });
+
+console.log(process.env.TOKEN);
+export const bot = {
+    token: process.env.TOKEN,
+};
 
 export const minio = {
     endPoint: process.env.SERVER_NAME,
@@ -17,7 +22,4 @@ export const mongo = {
     port: process.env.MONGO_PORT,
     id: process.env.MONGO_ID,
     pw: process.env.MONGO_PW,
-    dbName: process.env.MONGO_DB_NAME,
 };
-
-// export default minio;
