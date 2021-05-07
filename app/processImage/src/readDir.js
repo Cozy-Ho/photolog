@@ -1,22 +1,15 @@
-import path from "path";
 import fs from "fs";
 
-const __dirname = path.resolve();
-
-export async function readDir(dateString) {
-    const directoryPath = path.join(__dirname, "data/" + dateString);
-    let ret_list = [];
-    fs.readdir(directoryPath, function (err, files) {
-        //handling error
-        if (err) {
-            return console.log("Unable to scan directory: " + err);
+export function getFiles(dir, files_) {
+    files_ = files_ || [];
+    var files = fs.readdirSync(dir);
+    for (var i in files) {
+        var name = dir + "/" + files[i];
+        if (fs.statSync(name).isDirectory()) {
+            getFiles(name, files_);
+        } else {
+            files_.push(files[i]);
         }
-        //listing all files using forEach
-        files.forEach(function (file) {
-            // Do whatever you want to do with the file
-            // console.log(file);
-            ret_list.push(file);
-        });
-    });
-    return ret_list;
+    }
+    return files_;
 }

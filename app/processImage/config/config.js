@@ -5,6 +5,9 @@ const __dirname = path.resolve();
 dotenv.config({ path: path.join(__dirname, "/config/.env") });
 
 console.log(process.env.TOKEN);
+
+export const dataPath = process.env.DATA_PATH;
+
 export const bot = {
     token: process.env.TOKEN,
 };

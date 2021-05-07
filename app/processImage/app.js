@@ -2,10 +2,15 @@ import * as config from "./config/config.js";
 import TelegramBot from "node-telegram-bot-api";
 import exifr from "exifr";
 import Client from "./src/bucket.js";
+import { getFiles } from "./src/readDir.js";
+import { connect } from "./src/connMongo.js";
+import * as mongo from "./src/controlMongo.js";
 
-import { readDir } from "./src/readDir.js";
+await connect();
+const tableName = "test";
 
 // replace the value below with the Telegram token you receive from @BotFather
+const dataPath = config.dataPath;
 const token = config.bot.token;
 const minioSettings = {
     endPoint: config.minio.endPoint,
@@ -41,7 +46,16 @@ bot.on("message", (msg) => {
     bot.sendMessage(chatId, "Received your message");
 });
 
-readDir("subdata").then((res) => console.log(res));
+var files = getFiles(dataPath);
+for (var i in files) {
+    let output = await exifr.parse(dataPath + files[i]);
+    output.tableName = tableName;
+    output.filename = files[i];
+    output.id = files[i].split(".")[0];
+    // console.log(output);
+    // mongo.createPhoto(output);
+    mongo.deletePhoto(output);
+}
 // console.log(files);
 // exifr.parse("./temp/porf.jpg").then((output) => console.log(output));
 
