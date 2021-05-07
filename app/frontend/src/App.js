@@ -3,6 +3,7 @@ import "./App.css";
 import Mapbox from "./components/Map.js";
 import Modal from "./components/Modals/Modal.js";
 
+// TODO: https://visgl.github.io/react-map-gl/docs/get-started/get-started
 function App() {
     const [modalOpen, setModalOpen] = useState(false);
 
