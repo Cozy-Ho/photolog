@@ -3,6 +3,8 @@ import TelegramBot from "node-telegram-bot-api";
 import exifr from "exifr";
 import Client from "./src/bucket.js";
 
+import { readDir } from "./src/readDir.js";
+
 // replace the value below with the Telegram token you receive from @BotFather
 const token = config.bot.token;
 const minioSettings = {
@@ -13,7 +15,7 @@ const minioSettings = {
     secretKey: config.minio.secretKey,
 };
 
-var minio = new Client(Settings);
+var minio = new Client(minioSettings);
 // Create a bot that uses 'polling' to fetch new updates
 const bot = new TelegramBot(token, { polling: true });
 
@@ -39,6 +41,8 @@ bot.on("message", (msg) => {
     bot.sendMessage(chatId, "Received your message");
 });
 
-exifr.parse("./temp/porf.jpg").then((output) => console.log(output));
+readDir("subdata").then((res) => console.log(res));
+// console.log(files);
+// exifr.parse("./temp/porf.jpg").then((output) => console.log(output));
 
 // TODO: Image UPload => process image => insert Minio & DB
