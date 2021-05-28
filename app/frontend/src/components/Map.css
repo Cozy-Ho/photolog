@@ -1,6 +1,6 @@
 .btn-marker {
     background: url("./marker_red.png") no-repeat center / contain;
-    width: 22px;
-    height: 35px;
+    width: 1.5rem;
+    height: 2rem;
     border: none;
 }

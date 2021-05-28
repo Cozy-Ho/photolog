@@ -82,24 +82,3 @@ export default class Client {
         });
     }
 }
-
-// export function getBucketList(minioClient) {
-//     minioClient.listBuckets(function (err, buckets) {
-//         if (err) return console.log(err);
-//         console.log("buckets :", buckets);
-//     });
-// }
-
-// export function deleteBucket(minioClient, bucketName) {
-//     minioClient.removeBucket(bucketName, function (err) {
-//         if (err) return console.log("unable to remove bucket.");
-//         console.log("Bucket removed successfully.");
-//     });
-// }
-
-// export function createBucket(minioClient, bucketName) {
-//     minioClient.makeBucket(bucketName, "us-east-1", function (err) {
-//         if (err) return console.log("Error creating bucket.", err);
-//         console.log('Bucket created successfully in "us-east-1".');
-//     });
-// }
