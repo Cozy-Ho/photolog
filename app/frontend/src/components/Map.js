@@ -52,7 +52,7 @@ const Mapbox = () => {
                 transitionDuration={100}
                 mapboxApiAccessToken={MAP_TOKEN}
                 mapStyle="mapbox://styles/mapbox/streets-v9"
-                onViewportChange={(viewport) => {
+                onViewportChange={viewport => {
                     setViewport(viewport);
                 }}
             >

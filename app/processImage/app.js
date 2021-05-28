@@ -3,6 +3,9 @@ import TelegramBot from "node-telegram-bot-api";
 import exifr from "exifr";
 import Client from "./src/bucket.js";
 
+import path from "path";
+const __dirname = path.resolve();
+
 import { readDir } from "./src/readDir.js";
 
 // replace the value below with the Telegram token you receive from @BotFather
@@ -34,15 +37,23 @@ bot.onText(/\/echo (.+)/, (msg, match) => {
 
 // Listen for any kind of message. There are different kinds of
 // messages.
-bot.on("message", (msg) => {
+bot.on("message", msg => {
     const chatId = msg.chat.id;
 
     // send a message to the chat acknowledging receipt of their message
     bot.sendMessage(chatId, "Received your message");
 });
 
-readDir("subdata").then((res) => console.log(res));
+var files = readDir("subdata");
+console.log(files);
 // console.log(files);
-// exifr.parse("./temp/porf.jpg").then((output) => console.log(output));
+
+const directoryPath = path.join(__dirname, "data/" + "subdata/");
+for (var i in files) {
+    exifr
+        .parse(directoryPath + files[i])
+        .then(output => console.log(output))
+        .catch(err => console.log(err));
+}
 
 // TODO: Image UPload => process image => insert Minio & DB
